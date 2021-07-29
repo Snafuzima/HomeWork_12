@@ -16,7 +16,6 @@ public class Main {
             arr[i]++;
         }
 
-
         long a = System.currentTimeMillis();
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
@@ -45,17 +44,12 @@ public class Main {
                     arr1[i]++;
                 }
 
-
-                for (int i = 0; i < arr.length; i++) {
-                    arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+                for (int i = 0; i < arr1.length; i++) {
+                    arr1[i] = (float)(arr1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
                 }
-
-
-
             }
-              });
-        FirstHalf.start();
-        
+        });
+
          //вторая половина
         Thread SecondHalf = new Thread(new Runnable() {
 
@@ -64,23 +58,27 @@ public class Main {
 
                 System.arraycopy(arr, HALF, arr2, 0, HALF);
 
-                for(int i = 0; i<arr1.length;i++) {
-                    arr1[i]++;
+                for(int i = 0; i<arr2.length;i++) {
+                    arr2[i]++;
                 }
 
-                long a = System.currentTimeMillis();
-                for (int i = 0; i < arr.length; i++) {
-                    arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+
+                for (int i = 0; i < arr2.length; i++) {
+                    arr2[i] = (float)(arr2[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
                 }
-               // System.out.println(System.currentTimeMillis()-a);
+
 
 
             }
         });
+
+        FirstHalf.start();
         SecondHalf.start();
+
 
         System.arraycopy(arr1, 0, arr, 0, HALF);
         System.arraycopy(arr2, 0, arr, HALF, HALF);
+
 
         System.out.println(System.currentTimeMillis()-a);
         System.out.println("Длинна массива: "+arr.length);
